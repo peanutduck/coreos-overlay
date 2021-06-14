@@ -43,8 +43,6 @@ BDEPEND="${BUILD_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	${BUILD_DEPEND}
 	nftables? ( net-misc/ethertypes )
-	!<net-firewall/ebtables-2.0.11-r1
-	!<net-firewall/arptables-0.0.5-r1
 "
 
 PATCHES=(
@@ -123,9 +121,9 @@ src_install() {
 		rm "${ED}"/sbin/{arptables,ebtables}{,-{save,restore}} || die
 	fi
 
-	systemd_dounit "${FILESDIR}"/systemd/iptables-{re,}store.service
+	systemd_dounit "${FILESDIR}"/systemd/iptables{,-{re,}store}.service
 	if use ipv6 ; then
-		systemd_dounit "${FILESDIR}"/systemd/ip6tables-{re,}store.service
+		systemd_dounit "${FILESDIR}"/systemd/ip6tables{,-{re,}store}.service
 	fi
 
 	# Move important libs to /lib #332175
