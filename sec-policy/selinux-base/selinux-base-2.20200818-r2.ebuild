@@ -92,6 +92,10 @@ src_configure() {
 
 		sed -i -e "/= module/d" "${S}/${i}/policy/modules.conf" || die
 
+		# flatcar changes: it's required to run polkit without segfault
+		# we need to pass this argument now before the compilation of the policy
+		sed -i "s/allow_execmem = false/allow_execmem = true/" "${S}/${i}/policy/booleans.conf" || die
+
 		sed -i -e '/^QUIET/s/n/y/' -e "/^NAME/s/refpolicy/$i/" \
 			"${S}/${i}/build.conf" || die "build.conf setup failed."
 
@@ -142,9 +146,6 @@ src_install() {
 		echo "run_init_t" > "${D}/etc/selinux/${i}/contexts/run_init_type" || die
 
 		echo "textrel_shlib_t" >> "${D}/etc/selinux/${i}/contexts/customizable_types" || die
-
-		# flatcar changes
-		cp "${FILESDIR}/booleans" "${D}/etc/selinux/${i}/booleans"
 
 		# libsemanage won't make this on its own
 		keepdir "/etc/selinux/${i}/policy"
