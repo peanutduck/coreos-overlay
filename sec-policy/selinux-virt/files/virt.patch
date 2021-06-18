@@ -11,6 +11,7 @@
 +	type var_lib_t;
 +}
 +allow kernel_t svirt_lxc_net_t:process transition;
++allow kernel_t svirt_lxc_net_t:process2 nnp_transition;
 +fs_manage_tmpfs_chr_files(svirt_lxc_net_t)
 +fs_manage_tmpfs_dirs(svirt_lxc_net_t)
 +fs_manage_tmpfs_files(svirt_lxc_net_t)
