@@ -1,6 +1,7 @@
+index 256ea58..f72fbba 100644
 --- services/virt.te
 +++ services/virt.te
-@@ -1377,3 +1377,31 @@ sysnet_dns_name_resolve(virtlogd_t)
+@@ -1378,3 +1378,35 @@ sysnet_dns_name_resolve(virtlogd_t)
  
  virt_manage_log(virtlogd_t)
  virt_read_config(virtlogd_t)
@@ -11,6 +12,7 @@
 +	type var_lib_t;
 +}
 +allow kernel_t svirt_lxc_net_t:process transition;
++allow initrc_t svirt_lxc_net_t:process transition;
 +allow kernel_t svirt_lxc_net_t:process2 nnp_transition;
 +fs_manage_tmpfs_chr_files(svirt_lxc_net_t)
 +fs_manage_tmpfs_dirs(svirt_lxc_net_t)
@@ -33,3 +35,5 @@
 +allow svirt_lxc_net_t svirt_lxc_file_t:file { entrypoint mounton };
 +allow svirt_lxc_net_t var_lib_t:file { entrypoint execute execute_no_trans };
 +allow svirt_lxc_net_t kernel_t:fifo_file { getattr ioctl read write open append };
++allow svirt_lxc_net_t initrc_t:fifo_file { getattr ioctl read write open append };
++
