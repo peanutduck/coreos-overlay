@@ -36,7 +36,6 @@ BDEPEND="sys-devel/m4"
 
 # flatcar changes
 PATCHES=(
-	"${FILESDIR}"/mcs-sshd.patch
 	"${FILESDIR}"/0001-policy-modules-kernel-all-more-actions-for-kernel.patch
 	"${FILESDIR}"/0001-policy-ms-MCS-restricts-relabelfrom.patch
 )
