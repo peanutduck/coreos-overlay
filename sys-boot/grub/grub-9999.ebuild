@@ -81,7 +81,6 @@ BDEPEND="
 	truetype? ( virtual/pkgconfig )
 "
 DEPEND="
-  dev-libs/gnulib
 	app-arch/xz-utils
 	>=sys-libs/ncurses-5.2-r5:0=
 	grub_platforms_emu? (
